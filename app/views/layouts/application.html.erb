@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <header>
+      <% if logged_in? %>
+        <%= image_tag current_user.profile_icon_url %>
+        <%= link_to "#{current_user.name}さん", current_user %>
+        <%= link_to 'ログアウト', logout_path, method: :delete %>
+      <% else  %>
+        ゲストさん
+        <p><%= link_to 'Twitterでログイン', '/auth/twitter', method: :post %></p>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
