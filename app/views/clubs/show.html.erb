@@ -1,3 +1,11 @@
-<h1>Clubs#show</h1>
-<p>Find me in app/views/clubs/show.html.erb</p>
-<p><%= @club.inspect =%></p>
+<div>クラブ名: <%= @club.name %></div>
+<div>説明: <%= @club.description %></div>
+
+<h3>参加者</h3>
+<div>オーナー: <%= link_to "#{ @owner.nickname }", @owner %></div>
+<div><%= "メンバー（#{ @members.size }人）:" %></div>
+<% @members.each do |member| %>
+  <ul>
+    <li><%= link_to "#{ member.nickname }", member %></li>
+  </ul>
+<% end %>

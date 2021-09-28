@@ -4,6 +4,8 @@ class ClubsController < ApplicationController
 
   def show
     @club = Club.find(params[:id])
+    @owner = @club.owner
+    @members = @club.members
   end
 
   def new

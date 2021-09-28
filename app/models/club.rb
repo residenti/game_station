@@ -5,6 +5,14 @@ class Club < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 500 }
 
+  def owner
+    users.find_by(club_users: { ownered: true })
+  end
+
+  def members
+    users.where(club_users: { ownered: false })
+  end
+
   def save_with_owner(current_user)
     ActiveRecord::Base.transaction do
       save!
