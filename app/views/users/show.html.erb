@@ -1,5 +1,10 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<p><%= @user.inspect =%></p>
+<div><%= image_tag @user.profile_icon_url %></div>
+<div>ユーザ名: <%= @user.name %></div>
+<div>ユーザID: @<%= @user.nickname %></div>
 
-<%= link_to 'クラブを作成する', new_club_path %>
+<h3>参加中のクラブ一覧</h3>
+<% @user.clubs.each do |club| %>
+  <ul>
+    <li><%= link_to "#{club.name}", club %></li>
+  </ul>
+<% end %>

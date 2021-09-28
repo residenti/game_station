@@ -13,8 +13,8 @@
   <body>
     <header>
       <% if logged_in? %>
-        <%= image_tag current_user.profile_icon_url %>
         <%= link_to "#{current_user.name}さん", current_user %>
+        <%= link_to 'クラブを作成する', new_club_path %>
         <%= link_to 'ログアウト', logout_path, method: :delete %>
       <% else  %>
         ゲストさん
