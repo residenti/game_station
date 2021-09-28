@@ -7,7 +7,6 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -15,10 +14,10 @@
       <% if logged_in? %>
         <%= link_to "#{current_user.name}さん", current_user %>
         <%= link_to 'クラブを作成する', new_club_path %>
-        <%= link_to 'ログアウト', logout_path, method: :delete %>
+        <%= button_to 'ログアウト', logout_path, method: :delete %>
       <% else  %>
         ゲストさん
-        <p><%= link_to 'Twitterでログイン', '/auth/twitter', method: :post %></p>
+        <p><%= button_to 'Twitterでログイン', '/auth/twitter', method: :post %></p>
       <% end %>
     </header>
     <%= yield %>
