@@ -1,6 +1,12 @@
 <div>クラブ名: <%= @club.name %></div>
 <div>説明: <%= @club.description %></div>
 
+<% if current_user.owner?(@club) %>
+  <%= turbo_frame_tag 'invitation-urls' do %>
+    <%= button_to 'メンバー招待用URLを発行する', club_invitations_path(@club), method: :post %>
+  <% end %>
+<% end %>
+
 <h3>参加者</h3>
 <div>オーナー: <%= link_to "#{ @owner.nickname }", @owner %></div>
 <div><%= "メンバー（#{ @members.size }人）:" %></div>

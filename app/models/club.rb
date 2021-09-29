@@ -1,6 +1,7 @@
 class Club < ApplicationRecord
   has_many :club_users
   has_many :users, through: :club_users
+  has_many :invitations
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 500 }

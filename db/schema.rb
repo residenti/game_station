@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_26_132221) do
+ActiveRecord::Schema.define(version: 2021_09_30_132155) do
 
   create_table "club_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "club_id", null: false
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 2021_09_26_132221) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "invitations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "club_id", null: false
+    t.string "token", null: false
+    t.boolean "used", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["club_id"], name: "index_invitations_on_club_id"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "uid", null: false
     t.string "nickname", null: false
@@ -40,4 +50,5 @@ ActiveRecord::Schema.define(version: 2021_09_26_132221) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  add_foreign_key "invitations", "clubs"
 end
