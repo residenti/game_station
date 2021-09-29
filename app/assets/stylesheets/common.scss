@@ -1,0 +1,15 @@
+a, .button_to > input[type="submit"] {
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0px;
+  padding: 0px;
+  text-decoration: underline;
+  &:hover {
+    color: #fff;
+    background-color: #000;
+  }
+}
