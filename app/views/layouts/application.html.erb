@@ -18,7 +18,7 @@
         <%= button_to 'ログアウト', logout_path, method: :delete %>
       <% else  %>
         ゲストさん
-        <p><%= button_to 'Twitterでログイン', '/auth/twitter', method: :post %></p>
+        <p><%= button_to 'Twitterでログイン', '/auth/twitter', :data => { turbo: 'false' } %></p>
       <% end %>
     </header>
     <%= yield %>
