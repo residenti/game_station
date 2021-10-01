@@ -23,4 +23,8 @@ class Club < ApplicationRecord
   rescue ActiveRecord::RecordInvalid
     false
   end
+
+  def add_member!(user)
+    ClubUser.create!(club: self, user: user, ownered: false)
+  end
 end

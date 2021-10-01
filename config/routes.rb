@@ -4,12 +4,10 @@ Rails.application.routes.draw do
   get 'auth/failure', to: 'static_pages#home'
   delete 'logout', to: 'sessions#destroy'
   resources :sessions, only: %i[destroy]
-  resources :users, only: %i[show] do
-    collection do
-      post 'join_club'
-    end
-  end
+  resources :users, only: %i[show]
   resources :clubs do
-    resources :invitations, only: %i[show create]
+    resources :invitations, param: :token, only: %i[show create] do
+      post 'accept', on: :member
+    end
   end
 end

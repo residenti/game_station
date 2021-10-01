@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_or_create_from_auth_hash(auth_hash)
     log_in user.id
-    redirect_to user, notice: 'ログインしました。'
+    redirect_to_or_back(user, notice: 'ログインしました。')
   end
 
   def destroy
