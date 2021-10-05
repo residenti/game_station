@@ -1,0 +1,22 @@
+<!-- TODO リファクタリング  views/clubs/new.html.erb と重複 -->
+<% if @invitation.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <%= "#{@invitation.errors.count}個のエラーが有ります。" %>
+    </div>
+    <ul>
+      <% @invitation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div>
+  <h3><%= @club.name %></h3>
+  <div>
+  <%= image_tag @club.owner.profile_icon_url %>
+    招待者: @<%= @club.owner.nickname %>
+  </div>
+  <%= button_to 'クラブに参加する', accept_club_invitation_path(@club, @invitation.token) %>
+</div>

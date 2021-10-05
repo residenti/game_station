@@ -5,5 +5,9 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   resources :sessions, only: %i[destroy]
   resources :users, only: %i[show]
-  resources :clubs
+  resources :clubs do
+    resources :invitations, param: :token, only: %i[show create] do
+      post 'accept', on: :member
+    end
+  end
 end

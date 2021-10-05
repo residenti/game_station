@@ -89,6 +89,8 @@ GEM
       turbo-rails
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    importmap-rails (0.7.6)
+      rails (>= 6.0.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     listen (3.7.0)
@@ -165,6 +167,7 @@ GEM
       ffi (~> 1.0)
     redis (4.4.0)
     regexp_parser (2.1.1)
+    repost (0.3.8)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -219,6 +222,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   hotwire-rails
+  importmap-rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mysql2 (~> 0.5)
@@ -229,10 +233,10 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
   redis (~> 4.0)
+  repost
   sass-rails (>= 6)
   selenium-webdriver
   spring
-  turbo-rails
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers

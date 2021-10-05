@@ -1,6 +1,7 @@
 class Club < ApplicationRecord
   has_many :club_users
   has_many :users, through: :club_users
+  has_many :invitations
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 500 }
@@ -21,5 +22,9 @@ class Club < ApplicationRecord
     true
   rescue ActiveRecord::RecordInvalid
     false
+  end
+
+  def add_member!(user)
+    ClubUser.create!(club: self, user: user, ownered: false)
   end
 end
