@@ -17,14 +17,21 @@ class ClubsController < ApplicationController
     if @club.save_with_owner(current_user)
       redirect_to @club
     else
-      render 'new'
+      render :new
     end
   end
 
   def edit
+    @club = Club.find(params[:id])
   end
 
   def update
+    @club = Club.find(params[:id])
+    if @club.update(club_params)
+      redirect_to @club
+    else
+      render :edit
+    end
   end
 
   def destroy
