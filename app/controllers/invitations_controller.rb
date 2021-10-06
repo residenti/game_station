@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
-  skip_before_action :logged_in_required, only: %[show]
+  skip_before_action :logged_in_required, only: :show
+  skip_after_action :verify_authorized, only: :show
 
   def show
     # TODO 問答無用で登録/ログインせず、ユーザに確認取る
@@ -15,7 +16,7 @@ class InvitationsController < ApplicationController
   def create
     club = Club.find(params[:club_id])
     token = SecureRandom.urlsafe_base64
-    invitation = Invitation.create!(club: club, token: token)
+    invitation = authorize Invitation.create!(club: club, token: token)
     @invitation_url = "http://localhost:3000/clubs/#{ club.id }/invitations/#{ invitation.token }" # TODO 環境ごとにURLが変わるようにする
 
     render partial: 'invitaion_urls'
@@ -23,7 +24,7 @@ class InvitationsController < ApplicationController
 
   def accept
     @club = Club.find(params[:club_id])
-    @invitation = Invitation.find_by!(token: params[:token], club: @club)
+    @invitation = authorize Invitation.find_by!(token: params[:token], club: @club)
     @invitation.validate(current_user) # TODO リファクタリング 引数を無くす
     # NOTE unprocessable_entity を指定しないとレンダリングに失敗する
     # https://github.com/hotwired/turbo-rails/issues/12

@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :logged_in_required, only: :create
+  skip_after_action :verify_authorized
+
 
   def create
     user = User.find_or_create_from_auth_hash(auth_hash)
