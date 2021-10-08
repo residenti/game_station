@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :sessions, only: %i[destroy]
   resources :users, only: %i[show]
   resources :clubs do
+    delete 'resign_member', on: :member
     resources :invitations, param: :token, only: %i[show create] do
       post 'accept', on: :member
     end

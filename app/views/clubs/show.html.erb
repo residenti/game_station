@@ -17,6 +17,11 @@
 <div><%= "メンバー（#{ @members.size }人）:" %></div>
 <% @members.each do |member| %>
   <ul>
-    <li><%= link_to "#{ member.nickname }", member %></li>
+    <li>
+      <%= link_to "#{ member.nickname }", member %>
+      <% if current_user.owner?(@club) %>
+        <%= button_to 'クラブから退会させる', resign_member_club_path(@club, user_id: member.id), method: :delete%>
+      <% end %>
+    </li>
   </ul>
 <% end %>
