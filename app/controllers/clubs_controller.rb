@@ -31,6 +31,14 @@ class ClubsController < ApplicationController
     end
   end
 
+  def resign_member
+    club = authorize Club.find(params[:id])
+    user_club = club.club_users.find_by!(user_id: params[:user_id])
+    user_club.destroy!
+
+    redirect_to club
+  end
+
   private
 
   def club_params
