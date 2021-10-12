@@ -1,4 +1,5 @@
 @import 'bulma'; // https://bulma.io
+@import 'variables';
 
 body {
   display: flex;
@@ -9,7 +10,7 @@ main {
   flex: 1;
   background: $white-ter;
 }
-a, .button_to > input[type='submit'] {
+a, .button_to > .anchor-link {
   background: none;
   border: none;
   color: $link;
@@ -22,4 +23,13 @@ a, .button_to > input[type='submit'] {
   &:hover {
     color: $black;
   }
+}
+.club-card {
+  position: relative;
+}
+.club-card-info {
+  z-index: $z-indexst;
+  position: absolute;
+  top: 30px;
+  left: 30px;
 }

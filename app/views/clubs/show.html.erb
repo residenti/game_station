@@ -7,7 +7,7 @@
   </div>
   <div>
     <%= turbo_frame_tag 'invitation-urls' do %>
-      <%= button_to 'メンバー招待用URLを発行する', club_invitations_path(@club), method: :post %>
+      <%= button_to 'メンバー招待用URLを発行する', club_invitations_path(@club), method: :post, class: 'anchor-link '%>
     <% end %>
   </div>
 <% end %>
@@ -20,7 +20,7 @@
     <li>
       <%= link_to "#{ member.nickname }", member %>
       <% if current_user.owner?(@club) %>
-        <%= button_to 'クラブから退会させる', resign_member_club_path(@club, user_id: member.id), method: :delete%>
+        <%= button_to 'クラブから退会させる', resign_member_club_path(@club, user_id: member.id), method: :delete, class: 'anchor-link '%>
       <% end %>
     </li>
   </ul>

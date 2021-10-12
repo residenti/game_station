@@ -29,10 +29,10 @@
                 <% if logged_in? %>
                   <%= link_to "#{current_user.name}さん", current_user, class: 'navbar-item' %>
                   <%= link_to 'クラブを作成する', new_club_path, class: 'navbar-item' %>
-                  <%= button_to 'ログアウト', logout_path, method: :delete, class: 'navbar-item', form_class: 'button_to navbar-item' %>
+                  <%= button_to 'ログアウト', logout_path, method: :delete, class: 'anchor-link navbar-item', form_class: 'button_to navbar-item' %>
                 <% else  %>
                   <p class="navbar-item">ゲストさん</p>
-                  <%= button_to 'Twitterでログイン', '/auth/twitter', :data => { turbo: 'false' }, class: 'navbar-item', form_class: 'button_to navbar-item' %>
+                  <%= button_to 'Twitterでログイン', '/auth/twitter', :data => { turbo: 'false' }, class: 'anchor-link navbar-item', form_class: 'button_to navbar-item' %>
                 <% end %>
               </div>
             </div>

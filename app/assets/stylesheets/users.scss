@@ -2,23 +2,4 @@
 // https://bulma.io/documentation/customize/variables/
 $section-padding: 2rem 2.5rem;
 $card-content-padding: 1.5rem 4rem;
-
 @import 'bulma'; // https://bulma.io
-@import 'variables';
-
-.club-card {
-  position: relative;
-}
-.club-card-info {
-  z-index: $z-indexst;
-  position: absolute;
-  top: 30px;
-  left: 30px;
-}
-.club-card-info-title {
-  margin: 0 0 5px 0 !important;
-  color: $white;
-}
-.club-card-info-detail {
-  color: $white;
-}
