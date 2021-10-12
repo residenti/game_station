@@ -11,12 +11,24 @@
       </ul>
     </div>
   <% end %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name, maxlength: '50' %>
-
-  <%= f.label :description %>
-  <%= f.text_area :description, maxlength: '500' %>
-
-  <%= f.submit '保存する' %>
+  <div class="field">
+    <%= f.label :name, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :name, maxlength: '50', class: 'input', placeholder: 'Text input' %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :description, class: 'label' %>
+    <div class="control">
+      <%= f.text_area :description, maxlength: '500', class: 'textarea', placeholder: 'Textarea' %>
+    </div>
+  </div>
+  <div class="field is-grouped is-justify-content-center">
+    <div class="control">
+      <%= f.submit '保存する', class: 'button is-primary' %>
+    </div>
+    <div class="control">
+      <%= link_to'戻る', :back, class: 'button is-primary is-light' %>
+    </div>
+  </div>
 <% end %>
