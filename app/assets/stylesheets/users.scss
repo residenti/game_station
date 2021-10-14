@@ -1,5 +1,5 @@
-// To override any of bulma variables, just set them before importing Bulma.
-// https://bulma.io/documentation/customize/variables/
-$section-padding: 2rem 2.5rem;
-$card-content-padding: 1.5rem 4rem;
-@import 'bulma'; // https://bulma.io
+// Bulmaの12 columns systemが提供するis-4をクラスに指定すると、widthが33.33333%となり、m-1(margin: 1px)と衝突して2例になってしまうため、32.33333%のスタイルを独自定義している。
+#is-4 {
+  flex: none;
+  width: 32.333333%;
+}

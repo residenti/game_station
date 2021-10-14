@@ -1,8 +1,7 @@
 class ClubsController < ApplicationController
   def show
     @club = authorize Club.find(params[:id])
-    @owner = @club.owner
-    @members = @club.members
+    @members = @club.users
   end
 
   def new

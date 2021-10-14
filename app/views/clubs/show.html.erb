@@ -1,27 +1,66 @@
-<div>クラブ名: <%= @club.name %></div>
-<div>説明: <%= @club.description %></div>
-
-<% if current_user.owner?(@club) %>
-  <div>
-    <%= link_to 'クラブ情報を編集する', edit_club_path(@club) %>
+<div  data-controller="club" class="container is-max-desktop">
+  <div class="card">
+    <div class="card-content">
+      <div class="media is-align-items-center">
+        <div class="media-left">
+          <figure class="image is-128x128">
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" class="is-rounded">
+          </figure>
+        </div>
+        <div class="media-content">
+          <h1 class="title is-3"><%= @club.name %></h1>
+          <% if current_user.owner?(@club) %>
+            <div class="columns">
+              <div class="column">
+                <%= button_to 'クラブ情報を編集する', edit_club_path(@club), method: :get, class: 'button is-small is-primary has-text-weight-bold' %>
+              </div>
+              <div class="column">
+                <!-- TODO URLをポップアップで表示する -->
+                <%= turbo_frame_tag 'invitation-urls' do %>
+                  <%= button_to 'メンバー招待用URLを発行する', club_invitations_path(@club), method: :post, class: 'anchor-link '%>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <hr />
+      <div class="block">
+        <h2 class="title is-5">クラブについて</h2>
+        <p><%= @club.description %></p>
+      </div>
+      <div class="block">
+        <h2 class="title is-5"><%= "メンバー（#{ @members.size }人）" %></h2>
+        <div class="columns is-multiline m-0">
+          <% @members.each do |member| %>
+            <div id="is-4" class="column box m-1">
+              <%= link_to(member) do %>
+                <div class="media is-align-items-center">
+                  <div class="media-left">
+                    <figure class="image is-32x32">
+                      <%= image_tag member.profile_icon_url, class: 'is-rounded' %>
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <!-- TODO 繪文字をアイコンに差し替える -->
+                    <% if member.owner?(@club) %><small class="has-text-dark">👑</small><% end %>
+                    <p class="has-text-dark"><%= member.nickname %></p>
+                    <!-- TODO クラブを管理する画面を作成して、そこでメンバーを削除するようにする
+                      <% if current_user.owner?(@club) %>
+                        <%= button_to '', resign_member_club_path(@club, user_id: member.id), method: :delete, class: 'delete is-small', form_class: 'delete is-small' %>
+                      <% end %>
+                    -->
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="block">
+        <h2 class="title is-5">スケジュール</h2>
+        <div id='calendar'></div>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= turbo_frame_tag 'invitation-urls' do %>
-      <%= button_to 'メンバー招待用URLを発行する', club_invitations_path(@club), method: :post, class: 'anchor-link '%>
-    <% end %>
-  </div>
-<% end %>
-
-<h3>参加者</h3>
-<div>オーナー: <%= link_to "#{ @owner.nickname }", @owner %></div>
-<div><%= "メンバー（#{ @members.size }人）:" %></div>
-<% @members.each do |member| %>
-  <ul>
-    <li>
-      <%= link_to "#{ member.nickname }", member %>
-      <% if current_user.owner?(@club) %>
-        <%= button_to 'クラブから退会させる', resign_member_club_path(@club, user_id: member.id), method: :delete, class: 'anchor-link '%>
-      <% end %>
-    </li>
-  </ul>
-<% end %>
+</div>
