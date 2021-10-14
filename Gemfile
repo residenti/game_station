@@ -17,6 +17,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-rails_csrf_protection'
 gem 'repost'
 gem 'pundit'
+gem 'rails-i18n'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
