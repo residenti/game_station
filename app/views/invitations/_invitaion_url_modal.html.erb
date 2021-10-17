@@ -1,0 +1,12 @@
+<div id="invitation-url-modal" class="modal">
+  <div data-action="click->club#toggleInvitaionUrlModal" class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">メンバー招待用URL</p>
+      <button data-action="club#toggleInvitaionUrlModal" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <p><%= @invitation_url %></p>
+    </section>
+  </div>
+</div>

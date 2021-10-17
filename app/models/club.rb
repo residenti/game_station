@@ -23,4 +23,10 @@ class Club < ApplicationRecord
   def add_member!(user)
     ClubUser.create!(club: self, user: user, ownered: false)
   end
+
+  def issueInvitationUrl
+    token = SecureRandom.urlsafe_base64
+    invitation = Invitation.create!(club: self, token: token)
+    "http://localhost:3000/clubs/#{ self.id }/invitations/#{ invitation.token }" # TODO 環境ごとにURLが変わるようにする
+  end
 end

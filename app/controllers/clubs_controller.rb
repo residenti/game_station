@@ -2,6 +2,7 @@ class ClubsController < ApplicationController
   def show
     @club = authorize Club.find(params[:id])
     @members = @club.users
+    @invitation_url = @club.issueInvitationUrl
   end
 
   def new
