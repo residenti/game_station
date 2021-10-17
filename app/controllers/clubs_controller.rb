@@ -2,6 +2,8 @@ class ClubsController < ApplicationController
   def show
     @club = authorize Club.find(params[:id])
     @members = @club.users
+    # TODO クラブ詳細画面を表示するためにInvitationsテーブルにレコードが登録されているので、
+    # 招待URLが必要になったタイミングで呼び出すようにする
     @invitation_url = @club.issueInvitationUrl
   end
 
