@@ -1,3 +1,21 @@
 // Place all the styles related to the invitations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+#invitation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+#invitation-card {
+  width: calc(100% - 30px);
+  max-width: 335px;
+}
+#invitation-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.open-modal {
+  display: flex;
+}

@@ -1,0 +1,19 @@
+<div id="invitation-url-modal" class="modal">
+  <div data-action="click->club#toggleInvitaionUrlModal" class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">メンバー招待用URL</p>
+      <button data-action="club#toggleInvitaionUrlModal" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="columns">
+        <div class="column is-four-fifths">
+          <input data-club-target="invitationUrl" class="input" type="text" value="<%= @invitation_url %>" readonly>
+        </div>
+        <div class="column">
+          <button data-action="club#copyInvitaionUrl" class="button is-primary">コピー</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

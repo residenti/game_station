@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[show]
   resources :clubs do
     delete 'resign_member', on: :member
-    resources :invitations, param: :token, only: %i[show create] do
+    resources :invitations, param: :token, only: %i[show] do
       post 'accept', on: :member
     end
   end

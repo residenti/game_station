@@ -9,18 +9,39 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-    <header>
-      <% if logged_in? %>
-        <%= link_to "#{current_user.name}さん", current_user %>
-        <%= link_to 'クラブを作成する', new_club_path %>
-        <%= button_to 'ログアウト', logout_path, method: :delete %>
-      <% else  %>
-        ゲストさん
-        <p><%= button_to 'Twitterでログイン', '/auth/twitter', :data => { turbo: 'false' } %></p>
-      <% end %>
+    <header class="hero is-primary">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <!-- TODO ロゴを差し替える -->
+              <%= link_to image_tag('https://bulma.io/images/bulma-type-white.png', alt: 'Loge'), root_path, class: 'navbar-item' %>
+              <!-- TODO ハンバーガーメニューがクリックされたら展開されるようにする -->
+              <span class="navbar-burger" data-target="navbarMenuHeroA">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroA" class="navbar-menu">
+              <div class="navbar-end">
+                <% if logged_in? %>
+                  <%= link_to "#{current_user.name}さん", current_user, class: 'navbar-item' %>
+                  <%= link_to 'クラブを作成する', new_club_path, class: 'navbar-item' %>
+                  <%= button_to 'ログアウト', logout_path, method: :delete, class: 'anchor-link navbar-item', form_class: 'button_to navbar-item' %>
+                <% else  %>
+                  <p class="navbar-item">ゲストさん</p>
+                  <%= button_to 'Twitterでログイン', '/auth/twitter', :data => { turbo: 'false' }, class: 'anchor-link navbar-item', form_class: 'button_to navbar-item' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
     </header>
-    <%= yield %>
+    <main class="section">
+      <%= yield %>
+    </main>
   </body>
 </html>

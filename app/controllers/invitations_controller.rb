@@ -13,15 +13,6 @@ class InvitationsController < ApplicationController
     @club = @invitation.club
   end
 
-  def create
-    club = Club.find(params[:club_id])
-    token = SecureRandom.urlsafe_base64
-    invitation = authorize Invitation.create!(club: club, token: token)
-    @invitation_url = "http://localhost:3000/clubs/#{ club.id }/invitations/#{ invitation.token }" # TODO 環境ごとにURLが変わるようにする
-
-    render partial: 'invitaion_urls'
-  end
-
   def accept
     @club = Club.find(params[:club_id])
     @invitation = authorize Invitation.find_by!(token: params[:token], club: @club)

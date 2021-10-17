@@ -1,15 +1,38 @@
-a, .button_to > input[type="submit"] {
+// To override any of bulma variables, just set them before importing Bulma.
+// https://bulma.io/documentation/customize/variables/
+$section-padding: 2rem 2.5rem;
+$card-content-padding: 1.5rem 4rem;
+@import 'bulma'; // https://bulma.io
+@import 'variables';
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+  background: $white-ter;
+}
+a, .button_to > .anchor-link {
   background: none;
   border: none;
-  color: #000;
+  color: $link;
   cursor: pointer;
   font-size: 13px;
   line-height: 18px;
   margin: 0px;
   padding: 0px;
-  text-decoration: underline;
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: $black;
   }
+}
+.club-card {
+  position: relative;
+}
+.club-card-info {
+  z-index: $z-indexst;
+  position: absolute;
+  top: 30px;
+  left: 30px;
 }

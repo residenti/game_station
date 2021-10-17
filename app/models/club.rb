@@ -10,10 +10,6 @@ class Club < ApplicationRecord
     users.find_by(club_users: { ownered: true })
   end
 
-  def members
-    users.where(club_users: { ownered: false })
-  end
-
   def save_with_owner(current_user)
     ActiveRecord::Base.transaction do
       save!
@@ -26,5 +22,11 @@ class Club < ApplicationRecord
 
   def add_member!(user)
     ClubUser.create!(club: self, user: user, ownered: false)
+  end
+
+  def issueInvitationUrl
+    token = SecureRandom.urlsafe_base64
+    invitation = Invitation.create!(club: self, token: token)
+    "http://localhost:3000/clubs/#{ self.id }/invitations/#{ invitation.token }" # TODO 環境ごとにURLが変わるようにする
   end
 end
