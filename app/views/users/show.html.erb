@@ -18,7 +18,7 @@
       <div class="columns is-flex-wrap-wrap">
         <% @user.clubs.each do |club| %>
           <div class="column is-half">
-            <%= link_to(club_path, class: 'list-content') do %>
+            <%= link_to(club_path(club), class: 'list-content') do %>
               <div class="card club-card">
                 <div class="club-card-info">
                   <p class="title is-5 mb-1 has-text-white"><%= club.name %></p>
