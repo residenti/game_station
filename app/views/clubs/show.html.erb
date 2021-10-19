@@ -57,6 +57,11 @@
       <div data-controller="talkroom" class="block">
         <h2 class="title is-5">トークルーム</h2>
         <canvas id="canvas"></canvas>
+        <div class="">
+          <button data-action="talkroom#makeCall" class="button is-primary">電話を掛ける</button>
+          <input data-talkroom-target="peerId" type="text" class="input" />
+          <button data-action="talkroom#endCall" class="button">電話を切る</button>
+        </div>
       </div>
     </div>
   </div>
