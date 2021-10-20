@@ -3,7 +3,7 @@ import fabricjs from 'fabricjs'
 import Peer from 'skyway-js'
 
 export default class extends Controller {
-  static targets = [ 'peerId' ]
+  static targets = [ 'roomId' ]
 
   async connect() {
     let canvas = new fabric.Canvas('canvas');
@@ -25,7 +25,7 @@ export default class extends Controller {
     this.localStream = await navigator.mediaDevices.getUserMedia({
       video: false,
       audio: true,
-    });
+    }).catch(console.error);
 
     this.peer = new Peer({
       key: xxx, // TODO: Credentialから読み込む Rails.application.credentials.skyway[:api_key]
@@ -35,7 +35,7 @@ export default class extends Controller {
       console.log('this.peer.id', this.peer.id)
     });
     this.peer.on('call', (call) => {
-      call.answer(this.localStream);
+      call.answer(this.localStream); // ビデオ電話の時のみ必要かも
       this.setupCallEventHandlers(call);
     });
     this.peer.on('error', (err) => {
@@ -44,27 +44,28 @@ export default class extends Controller {
   }
 
   makeCall() {
-    console.log("this.peerIdTarget", this.peerIdTarget)
-    console.log("this.peerIdTarget.value", this.peerIdTarget.value)
-    const call = this.peer.call(this.peerIdTarget.value, this.localStream);
+    console.log("this.roomIdTarget.value", this.roomIdTarget.value)
+    if (!this.roomIdTarget.value) {
+      return;
+    }
+    const call = this.peer.joinRoom(this.roomIdTarget.value, { mode: 'sfu', stream: this.localStream });
     this.setupCallEventHandlers(call);
   }
 
   endCall() {
-    console.log("endCall this.existingCall", this.existingCall)
     this.existingCall.close();
   }
 
   setupCallEventHandlers(call) {
-    console.log("this.existingCall", this.existingCall)
+    console.log("call", call)
+
     if (this.existingCall) {
       this.existingCall.close();
     };
 
     this.existingCall = call;
-
-    call.on('stream', (stream) => {
-      console.log("call.remoteId", call.remoteId)
-    });
+    this.roomIdTarget.value = this.existingCall.name
+    console.log("this.existingCall.name", this.existingCall.name)
+    console.log("this.roomIdTarget.value", this.roomIdTarget.value)
   }
 }
