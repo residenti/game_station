@@ -21,10 +21,7 @@ class InvitationsController < ApplicationController
     # https://github.com/hotwired/turbo-rails/issues/12
     return render :show, status: :unprocessable_entity if @invitation.errors.any?
 
-    ActiveRecord::Base.transaction do
-      @club.add_member!(current_user)
-      @invitation.update!(used: true)
-    end
+    @club.add_member!(current_user)
 
     redirect_to @club
   end
